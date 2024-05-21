@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
+// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:simple_todo_app/components/my_button.dart';
@@ -6,7 +6,14 @@ import 'package:simple_todo_app/components/my_button.dart';
 class DialogBox extends StatelessWidget {
   final controller;
 
-  const DialogBox({super.key, required this.controller});
+  VoidCallback onSave;
+  VoidCallback onClose;
+
+  DialogBox(
+      {super.key,
+      required this.controller,
+      required this.onSave,
+      required this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +30,11 @@ class DialogBox extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              MyButton(text: 'Save', onPressed: () {}),
+              MyButton(text: 'Save', onPressed: onSave),
               const SizedBox(
                 width: 10,
               ),
-              MyButton(text: 'Cancel', onPressed: () {})
+              MyButton(text: 'Cancel', onPressed: onClose)
             ],
           )
         ]),
